@@ -38,123 +38,176 @@ HAVING condition;
 
 **Question 1**
 --
--- Paste Question 1 here
+![image](https://github.com/user-attachments/assets/68e58038-a741-45d1-a259-d29bdb59f69c)
+
 
 ```sql
--- Paste your SQL code below for Question 1
+SELECT PatientID, COUNT(AppointmentID) AS TotalAppointments
+FROM Appointments
+GROUP BY PatientID;
+
 ```
 
 **Output:**
 
-![Output1](output.png)
+![image](https://github.com/user-attachments/assets/632f0877-d7d2-4120-86cf-0439fdf5d77b)
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+![image](https://github.com/user-attachments/assets/6f062c88-3538-4b00-9f11-8f3e438651b1)
 
 ```sql
--- Paste your SQL code below for Question 2
+SELECT DoctorID, COUNT(AppointmentID) AS TotalAppointments
+FROM Appointments
+GROUP BY DoctorID;
+
 ```
 
 **Output:**
 
-![Output2](output.png)
+![image](https://github.com/user-attachments/assets/f8d33eca-2751-47cb-b4a5-e9718385235a)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+![image](https://github.com/user-attachments/assets/6d4130f1-346f-4c35-9b94-62099c20a25c)
+
 
 ```sql
--- Paste your SQL code below for Question 3
+SELECT 
+    strftime('%Y-%m', Date) AS Month, 
+    COUNT(*) AS TotalRecords
+FROM MedicalRecords
+GROUP BY Month
+ORDER BY Month;
+
 ```
 
 **Output:**
 
-![Output3](output.png)
+![image](https://github.com/user-attachments/assets/269d0736-b734-4501-80e8-1f45114d4468)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+![image](https://github.com/user-attachments/assets/f2e9986d-1edb-4664-9ba3-8c01b8f8919c)
+
 
 ```sql
--- Paste your SQL code below for Question 4
+SELECT COUNT(DISTINCT city) AS unique_cities
+FROM customer;
+
 ```
 
 **Output:**
 
-![Output4](output.png)
+![image](https://github.com/user-attachments/assets/665171d0-ab99-4ccc-b514-1aa95a6de054)
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+![image](https://github.com/user-attachments/assets/34b2a0f1-5629-4b94-a1aa-90e0fac7725d)
+
 
 ```sql
--- Paste your SQL code below for Question 5
+SELECT MIN(purch_amt) AS MINIMUM
+FROM orders;
+
 ```
 
 **Output:**
 
-![Output5](output.png)
+![image](https://github.com/user-attachments/assets/925ad7fc-794f-4aa7-a6b8-058bbc612936)
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+![image](https://github.com/user-attachments/assets/6f671b6d-bc60-4050-b0de-b4b626452f14)
+
 
 ```sql
--- Paste your SQL code below for Question 6
+SELECT name AS fruit_name, inventory AS lowest_quantity
+FROM fruits
+ORDER BY inventory ASC
+LIMIT 1;
+
 ```
 
 **Output:**
 
-![Output6](output.png)
+![image](https://github.com/user-attachments/assets/8dd7e262-6827-40f3-8500-edcc12548c9e)
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+![image](https://github.com/user-attachments/assets/13af30c7-9381-4a75-b4e5-3dfde53791ba)
+
 
 ```sql
--- Paste your SQL code below for Question 7
+SELECT name, email, LENGTH(email) AS min_email_length
+FROM customer
+ORDER BY LENGTH(email)
+LIMIT 1;
 ```
 
 **Output:**
 
-![Output7](output.png)
+![image](https://github.com/user-attachments/assets/b7c90a6e-af14-4fc3-ae3d-cb1b28c27f89)
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+![image](https://github.com/user-attachments/assets/ae18f9e1-9fb7-4183-b9ce-246d9317e270)
+
 
 ```sql
--- Paste your SQL code below for Question 8
+SELECT jdate, MAX(workhour) AS "MAX(workhour)"
+FROM employee1
+GROUP BY jdate
+HAVING MAX(workhour) > 12;
+
 ```
 
 **Output:**
 
-![Output8](output.png)
+![image](https://github.com/user-attachments/assets/70898768-0e58-4ad2-8c63-a0137b95b5b0)
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+![image](https://github.com/user-attachments/assets/e8b27a46-f5a6-4b0b-88c9-fbc8e5309b4e)
+
 
 ```sql
--- Paste your SQL code below for Question 9
+SELECT PatientID, COUNT(*) AS TotalRecords
+FROM MedicalRecords
+GROUP BY PatientID
+HAVING COUNT(*) > 3;
+
 ```
 
 **Output:**
 
-![Output9](output.png)
+![image](https://github.com/user-attachments/assets/a6805be7-ca31-4862-9f04-7d4c7756441e)
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+![image](https://github.com/user-attachments/assets/26c8918e-bd4f-4118-ba31-9a7c63655733)
+
 
 ```sql
--- Paste your SQL code below for Question 10
+SELECT (age / 5) * 5 AS age_group, AVG(age) AS "AVG(age)"
+FROM customer1
+GROUP BY age_group
+HAVING AVG(age) < 24;
+
 ```
 
 **Output:**
 
-![Output10](output.png)
+![image](https://github.com/user-attachments/assets/913fddd5-8ffc-49a0-9db7-8fb0f2407a67)
 
 
 ## RESULT
