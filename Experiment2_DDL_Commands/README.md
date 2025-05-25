@@ -105,123 +105,320 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+create a table named jobs including columns job_id, job_title, min_salary and max_salary, and make sure that, the default value for job_title is blank and min_salary is 8000 and max_salary is NULL will be entered automatically at the time of insertion if no value assigned for the specified columns.
 
-```sql
--- Paste your SQL code below for Question 1
+For example:
+
+##### Test	
+INSERT INTO jobs (job_id, job_title, min_salary, max_salary) VALUES (1, 'Software Engineer', 9000, 15000);
+SELECT * FROM jobs;
+
+##### Result
+job_id      job_title          min_salary  max_salary
+----------  -----------------  ----------  ----------
+1           Software Engineer  9000        15000
+
+#### Code:
+
 ```
-
+CREATE TABLE jobs
+(
+    job_id INTEGER PRIMARY KEY,
+    job_title VARCHAR(255) DEFAULT '',
+    min_salary INTEGER DEFAULT 8000,
+    max_salary INTEGER DEFAULT NULL
+);
+```
 **Output:**
 
-![Output1](output.png)
+![image](https://github.com/user-attachments/assets/0263e409-c43f-43ed-850a-15294dd76296)
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+Create a table named Employees with the following columns:
+```
+EmployeeID as INTEGER
+FirstName as TEXT
+LastName as TEXT
+HireDate as DATE
+For example:
+```
+##### Test	
+pragma table_info('Employees');
 
-```sql
--- Paste your SQL code below for Question 2
+##### Result
+```
+cid   name        type        notnull     dflt_value  pk
+----  ----------  ----------  ----------  ----------  ----------
+0     EmployeeID  INTEGER     0                       0
+1     FirstName   TEXT        0                       0
+2     LastName    TEXT        0                       0
+3     HireDate    DATE        0                       0
+```
+
+#### Code:
+
+```
+CREATE TABLE Employees
+(
+    EmployeeID INTEGER,
+    FirstName TEXT,
+    LastName TEXT,
+    HireDate DATE
+);
 ```
 
 **Output:**
 
-![Output2](output.png)
+![image](https://github.com/user-attachments/assets/ef4dbe13-c4e3-4ed6-8bbd-0c4af732eb8e)
 
 **Question 3**
 ---
--- Paste Question 3 here
+Insert a student with RollNo 201, Name David Lee, Gender M, Subject Physics, and MARKS 92 into the Student_details table.
 
-```sql
--- Paste your SQL code below for Question 3
+For example:
+
+##### Test	
+SELECT * FROM Student_details WHERE RollNo = 201;
+##### Result
+RollNo      Name        Gender      Subject     MARKS
+----------  ----------  ----------  ----------  ----------
+201         David Lee   M           Physics     92
+
+#### Code:
+```
+INSERT INTO Student_details(RollNo,Name,Gender,Subject,MARKS)
+VALUES (201,'David Lee','M','Physics',92)
 ```
 
 **Output:**
+![image](https://github.com/user-attachments/assets/2684010b-c94b-474f-aad1-95f7ef9bedbe)
 
-![Output3](output.png)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+Create a table named Employees with the following constraints:
 
-```sql
--- Paste your SQL code below for Question 4
+EmployeeID should be the primary key.
+FirstName and LastName should be NOT NULL.
+Email should be unique.
+Salary should be greater than 0.
+DepartmentID should be a foreign key referencing the Departments table.
+For example:
+
+##### Test	
+-- Attempt to insert a record with NULL FirstName
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Email, Salary, DepartmentID)
+VALUES (1, NULL, 'Doe', 'john.doe@example.com', 50000, 1);
+##### Result
+Error: NOT NULL constraint failed: Employees.FirstName
+
+#### Code:
 ```
-
+CREATE TABLE Employees
+(
+    EmployeeID INTEGER PRIMARY KEY,
+    FirstName VARCHAR(30) NOT NULL,
+    LastName VARCHAR(30) NOT NULL,
+    Email VARCHAR(255) UNIQUE,
+    Salary DECIMAL(10,2) CHECK (Salary>0),
+    DepartmentID INTEGER,
+    FOREIGN KEY(DepartmentID) REFERENCES Departments(DepartmentID)
+);
+```
 **Output:**
 
-![Output4](output.png)
+![image](https://github.com/user-attachments/assets/f7f4bded-69e5-44c1-82aa-6a8b5a6586b1)
 
 **Question 5**
 ---
--- Paste Question 5 here
+In the Student_details table, insert a student record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
 
-```sql
--- Paste your SQL code below for Question 5
+RollNo      Name            Gender      Subject      MARKS
+----------  ------------    ----------  ----------   ----------
+205         Olivia Green    F
+207         Liam Smith      M           Mathematics  85
+208         Sophia Johnson  F           Science
+For example:
+
+##### Test	
+select * from Student_details;
+##### Result
+RollNo      Name          Gender      Subject     MARKS
+----------  ------------  ----------  ----------  ----------
+205         Olivia Green  F
+207         Liam Smith    M           Mathematic  85
+208         Sophia Johns  F           Science
+
+#### Code:
+```
+INSERT INTO Student_details(RollNo,Name,Gender,Subject,MARKS)
+VALUES (205,'Olivia Green','F',NULL,NULL);
+INSERT INTO Student_details(RollNo,Name,Gender,Subject,MARKS)
+VALUES (207,'Liam Smith','M','Mathematics',85);
+INSERT INTO Student_details(RollNo,Name,Gender,Subject,MARKS)
+VALUES (208,'Sophia Johnson','F','Science',NULL);
 ```
 
 **Output:**
 
-![Output5](output.png)
+![image](https://github.com/user-attachments/assets/24bce137-54ba-4ec9-8deb-b9ec2abf73dd)
+
 
 **Question 6**
----
--- Paste Question 6 here
+Write a SQL query to Add a new column Country as text in the Student_details table.
 
-```sql
--- Paste your SQL code below for Question 6
+Sample table: Student_details
+
+ cid              name             type   notnull     dflt_value  pk
+---------------  ---------------  -----  ----------  ----------  ----------
+0                RollNo           int    0                       1
+1                Name             VARCH  1                       0
+2                Gender           TEXT   1                       0
+3                Subject          VARCH  0                       0
+4                MARKS            INT (  0                       0
+For example:
+
+##### Test	
+pragma table_info('Student_details');
+##### Result
+cid         name        type        notnull     dflt_value  pk
+----------  ----------  ----------  ----------  ----------  ----------
+0           RollNo      int         0                       1
+1           Name        VARCHAR(10  1                       0
+2           Gender      TEXT        1                       0
+3           Subject     VARCHAR(30  0                       0
+4           MARKS       INT (3)     0                       0
+5           Country     TEXT        0                       0
+
+#### Code:
+```
+ALTER TABLE Student_details 
+ADD COLUMN Country TEXT;
 ```
 
 **Output:**
 
-![Output6](output.png)
+![image](https://github.com/user-attachments/assets/17acb212-0167-4443-a62c-1bc8a1201fb2)
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+Write a SQL Query to add an attribute designation in the employee table with the data type VARCHAR(50).
 
-```sql
--- Paste your SQL code below for Question 7
+For example:
+
+##### Test	
+pragma table_info('employee');
+##### Result
+cid         name        type        notnull     dflt_value  pk
+----------  ----------  ----------  ----------  ----------  ----------
+0           id          integer     0                       0
+1           salary      number      0                       0
+2           designatio  varchar(50  0                       0
+
+#### Code:
+```
+ALTER TABLE employee
+ADD COLUMN designation varchar(50);
 ```
 
 **Output:**
 
-![Output7](output.png)
+![image](https://github.com/user-attachments/assets/63049dfe-34e6-4bd4-aad5-14f08e217359)
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+Create a table named Invoices with the following constraints:
 
-```sql
--- Paste your SQL code below for Question 8
+InvoiceID as INTEGER should be the primary key.
+InvoiceDate as DATE.
+DueDate as DATE should be greater than the InvoiceDate.
+Amount as REAL should be greater than 0.
+For example:
+
+##### Test	
+INSERT INTO Invoices (InvoiceID, InvoiceDate)
+VALUES (1, '2024-08-08'),(1,'2024-09-08');
+##### Result
+Error: UNIQUE constraint failed: Invoices.InvoiceID
+
+#### Code:
 ```
-
+CREATE TABLE Invoices
+(
+    InvoiceID INTEGER PRIMARY KEY,
+    InvoiceDate DATE,
+    DueDate DATE CHECK (DueDate > InvoiceDate),
+    Amount REAL CHECK (Amount>0)
+);
+```
 **Output:**
 
-![Output8](output.png)
+![image](https://github.com/user-attachments/assets/503412c7-22c0-4f5b-9f44-2a2d8160a4d0)
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Create a table named Orders with the following constraints:
+OrderID as INTEGER should be the primary key.
+OrderDate as DATE should be not NULL.
+CustomerID as INTEGER should be a foreign key referencing Customers(CustomerID).
+For example:
 
-```sql
--- Paste your SQL code below for Question 9
+##### Test	
+INSERT INTO Customers (CustomerID, FirstName, LastName, Email) VALUES (1, 'Alice', 'Johnson', 'alice.johnson@example.com');
+INSERT INTO Orders (OrderID, OrderDate, CustomerID) VALUES (1, '2024-08-01', 1);
+select * from orders;
+##### Result
+OrderID     OrderDate   CustomerID
+----------  ----------  ----------
+1           2024-08-01  1
+#### Code:
 ```
-
+CREATE TABLE Orders
+(
+    OrderID INTEGER PRIMARY KEY,
+    OrderDate DATE NOT NULL,
+    CustomerID INTEGER,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+```
 **Output:**
 
-![Output9](output.png)
+![image](https://github.com/user-attachments/assets/6a4ef27b-0633-4299-912a-4c089902eb47)
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+Insert all customers from Old_customers into Customers
 
-```sql
--- Paste your SQL code below for Question 10
+Table attributes are CustomerID, Name, Address, Email
+
+For example:
+
+##### Test	
+select * from Customers;
+##### Result
+CustomerID  Name             Address         Email
+----------  ---------------  --------------  ---------------------
+301         Michael Johnson  123 Elm Street  michael.j@example.com
+302         Sarah Lee        456 Oak Avenue  sarah.lee@example.com
+303         David Wilson     789 Pine Road   david.w@example.com
+
+#### Code:
 ```
-
+INSERT INTO Customers(CustomerID, Name, Address, Email)
+SELECT CustomerID, Name, Address, Email
+FROM Old_customers;
+```
 **Output:**
 
-![Output10](output.png)
+![image](https://github.com/user-attachments/assets/687876de-d64d-4d71-8d32-d6030629c06b)
+
 
 
 ## RESULT
